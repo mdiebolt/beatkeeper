@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="400px" height="400px" viewBox="0 0 400 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
+    <title>Bass Drum Thumbail</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Bass-Drum-Thumbail" sketch:type="MSArtboardGroup">
+            <circle id="Oval-1" fill="#DCB99B" sketch:type="MSShapeGroup" cx="200.5" cy="200.5" r="136.5"></circle>
+            <circle id="Oval-1" fill="#000000" sketch:type="MSShapeGroup" cx="201" cy="201" r="124"></circle>
+            <rect id="Rectangle-1" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(253.589089, 320.982506) rotate(-303.000000) translate(-253.589089, -320.982506) " x="240.999089" y="316.532506" width="25.1800003" height="8.89999962" rx="8"></rect>
+            <rect id="Rectangle-1" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(253.589089, 82.982506) scale(-1, 1) rotate(-303.000000) translate(-253.589089, -82.982506) " x="240.999089" y="78.5325064" width="25.1800003" height="8.89999962" rx="8"></rect>
+            <rect id="Rectangle-1" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(143.000342, 318.801168) rotate(-234.000000) translate(-143.000342, -318.801168) " x="130.410342" y="314.351169" width="25.1800003" height="8.89999962" rx="8"></rect>
+            <rect id="Rectangle-1" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(154.000342, 80.801168) scale(-1, 1) rotate(-234.000000) translate(-154.000342, -80.801168) " x="141.410342" y="76.3511685" width="25.1800003" height="8.89999962" rx="8"></rect>
+            <rect id="Rectangle-1" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(317.801168, 258.000342) rotate(-324.000000) translate(-317.801168, -258.000342) " x="305.211168" y="253.550342" width="25.1800003" height="8.89999962" rx="8"></rect>
+            <rect id="Rectangle-1" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(84.801168, 258.000342) scale(-1, 1) rotate(-324.000000) translate(-84.801168, -258.000342) " x="72.2111682" y="253.550342" width="25.1800003" height="8.89999962" rx="8"></rect>
+            <rect id="Rectangle-1" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(84.801168, 138.000342) rotate(-324.000000) translate(-84.801168, -138.000342) " x="72.2111682" y="133.550342" width="25.1800003" height="8.89999962" rx="8"></rect>
+            <rect id="Rectangle-1" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(311.801168, 135.000342) scale(-1, 1) rotate(-324.000000) translate(-311.801168, -135.000342) " x="299.211168" y="130.550342" width="25.1800003" height="8.89999962" rx="8"></rect>
+        </g>
+    </g>
+</svg>

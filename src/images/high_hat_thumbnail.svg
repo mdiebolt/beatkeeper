@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="400px" height="400px" viewBox="0 0 400 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
+    <title>High Hat Thumbnail</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="High-Hat-Thumbnail" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-11" fill="#D8D8D8" sketch:type="MSShapeGroup" x="192" y="96" width="7" height="192" rx="8"></rect>
+            <path d="M29.1420163,173.991336 C23.6215035,173.98793 23.4567222,175.203983 28.7747726,176.707693 L186.559899,221.322372 C191.877589,222.82598 200.495638,222.819023 205.806419,221.307525 L361.696354,176.939797 C367.008224,175.427989 366.829602,174.19966 361.318573,174.196261 L29.1420163,173.991336 Z" id="Path-1" fill="#F8D21C" sketch:type="MSShapeGroup"></path>
+            <path d="M29.9998425,174.053559 C24.4793297,174.056965 24.3145483,172.840912 29.6325987,171.337202 L187.417725,126.722524 C192.735415,125.218915 201.353464,125.225872 206.664245,126.73737 L362.55418,171.105098 C367.86605,172.616906 367.687429,173.845235 362.176399,173.848635 L29.9998425,174.053559 Z" id="Path-1" fill="#FBEA15" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>
