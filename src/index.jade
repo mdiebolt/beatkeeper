@@ -6,29 +6,18 @@ html(lang="en")
     link(rel="stylesheet" media="screen" href="src/css/main.css")
   body
     .site__sidebar
-      .beatkeeper__select-loops
-        .beatkeeper__loop
-          .beatkeeper__loop-number 1.
-          .beatkeeper__loop-preview
-          .beatkeeper__loop-name Loop 1
-          .beatkeeper__loop-listen
-        .beatkeeper__loop
-          .beatkeeper__loop-number 2.
-          .beatkeeper__loop-preview
-          .beatkeeper__loop-name Loop 2
-          .beatkeeper__loop-listen
-        .beatkeeper__loop
-          .beatkeeper__loop-number 3.
-          .beatkeeper__loop-preview
-          .beatkeeper__loop-name Loop 3
-          .beatkeeper__loop-listen
+      .beatkeeper__loops
     .site__main
       .beatkeeper__playback-animation
-
+        img.beatkeeper__playback-hh(src="src/images/high_hat.svg")
+        img.beatkeeper__playback-snare(src="src/images/snare_drum.svg")
+        img.beatkeeper__playback-bass(src="src/images/bass_drum.svg")
       svg.beatkeeper__notation(width="800" height="200")
-        g.beatkeeper__instrument-line(transform="translate(0,40)")
-        g.beatkeeper__instrument-line(transform="translate(0,80)")
-        g.beatkeeper__instrument-line(transform="translate(0,120)")
+        g.beatkeeper__instruments
+          g.beatkeeper__instrument(transform="translate(0,40)")
+          g.beatkeeper__instrument(transform="translate(0,80)")
+          g.beatkeeper__instrument(transform="translate(0,120)")
+        g.beatkeeper__subdivisions
 
       .beatkeeper__actions
         button Submit
