@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "dist/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -42,13 +42,6 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(1);
-
-
-/***/ },
-/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $lineContainers, $svg, d3, divisions, i, line, lineData, prop, results, staffHeight, staffWidth, subdivisionIncrements, verticalLine;
@@ -83,7 +76,7 @@
 	  }
 	];
 
-	d3 = __webpack_require__(2);
+	d3 = __webpack_require__(1);
 
 	line = d3.svg.line().x(prop("x")).y(prop("y")).interpolate("linear");
 
@@ -92,6 +85,8 @@
 	$lineContainers = d3.selectAll(".beatkeeper__instrument-line");
 
 	$lineContainers.append("path").attr("d", line(lineData)).attr("stroke", "blue").attr("stroke-width", 2).attr("fill", "none");
+
+	alert("hi");
 
 	divisions = 8;
 
@@ -119,7 +114,7 @@
 
 
 /***/ },
-/* 2 */
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {

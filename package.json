@@ -7,8 +7,7 @@
     "test": "",
     "webpack": "webpack",
     "jade": "jade src/index.jade --out .",
-    "start": "webpack-dev-server --progress --colors --hot --content-base dist",
-    "open": "npm run webpack && npm run jade && open index.html"
+    "start": "webpack-dev-server -d --hot"
   },
   "keywords": [
     "drum",
