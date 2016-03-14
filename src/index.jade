@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+  head
+    title Beatkeeper
+    link(type="text/css" href="css/main.css")
+    link(rel="stylesheet" media="screen" href="src/css/main.css")
+  body
+    .site__sidebar
+      .beatkeeper__select-loops
+        .beatkeeper__loop
+          .beatkeeper__loop-number 1.
+          .beatkeeper__loop-preview
+          .beatkeeper__loop-name Loop 1
+          .beatkeeper__loop-listen
+        .beatkeeper__loop
+          .beatkeeper__loop-number 2.
+          .beatkeeper__loop-preview
+          .beatkeeper__loop-name Loop 2
+          .beatkeeper__loop-listen
+        .beatkeeper__loop
+          .beatkeeper__loop-number 3.
+          .beatkeeper__loop-preview
+          .beatkeeper__loop-name Loop 3
+          .beatkeeper__loop-listen
+    .site__main
+      .beatkeeper__playback-animation
+
+      svg.beatkeeper__notation(width="800" height="200")
+        g.beatkeeper__instrument-line(transform="translate(0,40)")
+        g.beatkeeper__instrument-line(transform="translate(0,80)")
+        g.beatkeeper__instrument-line(transform="translate(0,120)")
+
+      .beatkeeper__actions
+        button Submit
+        button Try again
+        button Tell me the answer
+    script(type="text/javascript" src="dist/bundle.js" charset="utf-8")
