@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="400px" height="400px" viewBox="0 0 400 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
+    <title>Snare Drum</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Snare-Drum" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-11" fill="#9B9B9B" sketch:type="MSShapeGroup" x="197" y="134" width="7" height="187" rx="8"></rect>
+            <rect id="Rectangle-11" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(216.840600, 306.072240) rotate(-37.000000) translate(-216.840600, -306.072240) " x="213.3406" y="281.07224" width="7" height="50" rx="8"></rect>
+            <rect id="Rectangle-11" fill="#9B9B9B" sketch:type="MSShapeGroup" transform="translate(184.840600, 305.072240) scale(-1, 1) rotate(-37.000000) translate(-184.840600, -305.072240) " x="181.3406" y="280.07224" width="7" height="50" rx="8"></rect>
+            <path d="M93,90.3832304 C93,85.961054 96.3973007,81.2600602 100.637941,80.0102934 C100.637941,80.0102934 132.414062,68 200,68 C267.585938,68 299.376364,80.0143167 299.376364,80.0143167 C303.586782,81.3187333 307,85.9536874 307,90.3832304 L307,179.180245 C307,183.602422 303.604466,188.323409 299.367428,189.577828 C299.367428,189.577828 270.164062,201.070312 200,201.070312 C129.835938,201.070312 100.618516,189.573878 100.618516,189.573878 C96.410926,188.25581 93,183.609788 93,179.180245 L93,90.3832304 Z" id="Rectangle-14" fill="#4A4A4A" sketch:type="MSShapeGroup"></path>
+            <ellipse id="Oval-4" fill="#D8D8D8" sketch:type="MSShapeGroup" cx="200.5" cy="93" rx="96.5" ry="18"></ellipse>
+            <path d="M169.5,122.5 L169.5,188.5" id="Line" stroke="#979797" stroke-width="5" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+            <path d="M235.5,121.5 L235.5,187.5" id="Line-Copy" stroke="#979797" stroke-width="5" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+            <path d="M300.5,109.5 L300.5,175.5" id="Line-Copy-2" stroke="#979797" stroke-width="5" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+            <path d="M103.5,109.5 L103.5,180.5" id="Line" stroke="#979797" stroke-width="5" stroke-linecap="square" sketch:type="MSShapeGroup"></path>
+            <path d="M90,100.320433 C90,98.9443676 90.791357,98.608112 91.8711657,99.4805541 C91.8711657,99.4805541 105.727053,117.399402 201.01059,117.399402 C296.294127,117.399402 307.491091,99.5742051 307.491091,99.5742051 C308.45699,98.6102699 309.240005,98.944738 309.240005,100.320433 L309.240005,103.011441 C309.240005,104.387507 308.353883,106.185915 307.197998,106.9521 C307.197998,106.9521 289.236343,123.770721 201.01059,123.841768 C114.995849,123.911034 92.1240948,106.797148 92.1240948,106.797148 C90.9509896,106.082426 90,104.387136 90,103.011441 L90,100.320433 Z" id="Rectangle-18" fill="#D8D8D8" sketch:type="MSShapeGroup"></path>
+            <path d="M90,172.320433 C90,170.944368 90.791357,170.608112 91.8711657,171.480554 C91.8711657,171.480554 105.727053,189.399402 201.01059,189.399402 C296.294127,189.399402 307.491091,171.574205 307.491091,171.574205 C308.45699,170.61027 309.240005,170.944738 309.240005,172.320433 L309.240005,175.011441 C309.240005,176.387507 308.353883,178.185915 307.197998,178.9521 C307.197998,178.9521 289.236343,195.770721 201.01059,195.841768 C114.995849,195.911034 92.1240948,178.797148 92.1240948,178.797148 C90.9509896,178.082426 90,176.387136 90,175.011441 L90,172.320433 Z" id="Rectangle-18" fill="#D8D8D8" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>
