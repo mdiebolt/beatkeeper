@@ -1,5 +1,7 @@
 d3 = require("d3")
 beats = require("beat_data")
+require("load_buffers")
+window.player = require("playback")
 
 prop = (attr) ->
   (d) ->
