@@ -12,15 +12,16 @@ html(lang="en")
         img.beatkeeper__playback-hh(src="src/images/high_hat.svg")
         img.beatkeeper__playback-snare(src="src/images/snare_drum.svg")
         img.beatkeeper__playback-bass(src="src/images/bass_drum.svg")
-      svg.beatkeeper__notation(width="800" height="200")
+      svg.beatkeeper__notation
         g.beatkeeper__instruments
           g.beatkeeper__instrument(transform="translate(0,40)")
           g.beatkeeper__instrument(transform="translate(0,80)")
           g.beatkeeper__instrument(transform="translate(0,120)")
         g.beatkeeper__subdivisions
+        g.beatkeeper__playback
 
       .beatkeeper__actions
-        button Submit
-        button Try again
-        button Tell me the answer
+        button.beatkeeper__button.beatkeeper__submit Submit
+        button.beatkeeper__button.beatkeeper__try-again Try again
+        button.beatkeeper__button.beatkeeper__give-up Tell me the answer
     script(type="text/javascript" src="dist/bundle.js" charset="utf-8")

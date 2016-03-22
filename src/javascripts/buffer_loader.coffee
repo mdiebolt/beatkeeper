@@ -2,11 +2,20 @@ BufferLoader = (context, urlList, callback) ->
   @context = context
   @urlList = urlList
   @onload = callback
-  @bufferList = new Array()
+  @bufferList = []
   @loadCount = 0
 
-BufferLoader.prototype.loadBuffer = (url, index) ->
-  # Load buffer asynchronously
+loadSuccess = (buffer, loader, index) ->
+  return alert("error decoding file data: #{url}") unless buffer
+
+  loader.bufferList[index] = buffer
+  loader.loadCount += 1
+  loader.onload(loader.bufferList) if loader.loadCount == loader.urlList.length
+
+loadError = (error) ->
+  console.error("decodeAudioData error", error)
+
+BufferLoader::loadBuffer = (url, index) ->
   request = new XMLHttpRequest()
   request.open("GET", url, true)
   request.responseType = "arraybuffer"
@@ -14,28 +23,18 @@ BufferLoader.prototype.loadBuffer = (url, index) ->
   loader = @
 
   request.onload = ->
-    # Asynchronously decode the audio file data in request.response
-    loader.context.decodeAudioData(
-      request.response,
-      (buffer) ->
-        unless buffer
-          alert("error decoding file data: #{url}")
-          return
-
-        loader.bufferList[index] = buffer
-        if ++loader.loadCount == loader.urlList.length
-          loader.onload(loader.bufferList)
-      ,
-      (error) ->
-        console.error("decodeAudioData error", error)
-    )
+    loader.context.decodeAudioData request.response
+    , (buffer) ->
+      loadSuccess(buffer, loader, index)
+    , (error) ->
+      loadError(error)
 
   request.onerror = ->
     alert("BufferLoader: XHR error")
 
   request.send()
 
-BufferLoader.prototype.load = ->
+BufferLoader::load = ->
   @urlList.forEach (item, i) =>
     @loadBuffer(item, i)
 

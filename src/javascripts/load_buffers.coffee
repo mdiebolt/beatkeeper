@@ -13,7 +13,6 @@ BUFFERS_TO_LOAD =
 
 # Loads all sound samples into the buffers object.
 loadBuffers = ->
-  # Array-ify
   names = []
   paths = []
   for name, path of BUFFERS_TO_LOAD
