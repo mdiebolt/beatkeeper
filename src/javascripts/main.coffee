@@ -1,5 +1,2 @@
-loops = require("loops")
-staff = require("staff")
-
-loops.create()
-staff.create()
+require("loops").create()
+require("staff").create()

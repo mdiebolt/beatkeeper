@@ -18,10 +18,16 @@ playbackLine = [
   { x: 0, y: staffHeight }
 ]
 
+beatNotes = []
+
 divisions = 16
 subdivisionIncrements = staffWidth / divisions
 verticalLines = [0..divisions].map (n) ->
   x = n * subdivisionIncrements
+
+  beatNotes.push { x: x, y: 40, radius: 15, patternLink: "#hh-thumbnail" }
+  beatNotes.push { x: x, y: 80, radius: 15, patternLink: "#snare-thumbnail" }
+  beatNotes.push { x: x, y: staffHeight, radius: 15, patternLink: "#kick-thumbnail" }
 
   [
     { x: x, y: 40 }
@@ -55,6 +61,26 @@ createSubdivisionLines = ->
       .attr("stroke-width", strokeWidth)
       .attr("fill", "none")
 
+createBeatNotes = ->
+  $circle = d3.select(".beatkeeper__notes").selectAll("circle")
+    .data(beatNotes)
+    .enter()
+    .append("circle")
+      .attr
+        class: "beatkeeper__beat-note"
+        cx: (d) -> d.x
+        cy: (d) -> d.y
+        r: (d) -> d.radius
+
+  $circle.on "click", (data) ->
+    $el = d3.select(@)
+
+    if $el.style("fill") == "url(\"#hh-thumbnail\")"
+      $el.style "fill", "rgba(100, 100, 100, 0.5)"
+    else
+      $el.style "fill", (d) ->
+        "url(#{d.patternLink})"
+
 createPlaybackLine = ->
   d3.select(".beatkeeper__playback").selectAll("path")
     .data(playbackLine)
@@ -76,6 +102,7 @@ module.exports =
     createInstrumentLines()
     createSubdivisionLines()
     createPlaybackLine()
+    createBeatNotes()
 
   update: (data) ->
     updatePlaybackLine(data)

@@ -107,3 +107,8 @@ body {
   box-shadow: none;
   transform: translateY(3px);
 }
+
+.beatkeeper__beat-note {
+  fill: rgba(100, 100, 100, 0.5);
+  cursor: pointer;
+}

@@ -13,11 +13,19 @@ html(lang="en")
         img.beatkeeper__playback-snare(src="src/images/snare_drum.svg")
         img.beatkeeper__playback-bass(src="src/images/bass_drum.svg")
       svg.beatkeeper__notation
+        pattern#hh-thumbnail(x="0" y="0" height="15" width="15")
+          image(x="0" y="0" width="15" height="15" xlink:href="src/images/snare.jpg")
+        pattern#snare-thumbnail(x="0" y="0" height="15" width="15")
+          image(x="0" y="0" width="15" height="15" xlink:href="src/images/snare.jpg")
+        pattern#kick-thumbnail(x="0" y="0" height="15" width="15")
+          image(x="0" y="0" width="15" height="15" xlink:href="src/images/snare.jpg")
+
         g.beatkeeper__instruments
           g.beatkeeper__instrument(transform="translate(0,40)")
           g.beatkeeper__instrument(transform="translate(0,80)")
           g.beatkeeper__instrument(transform="translate(0,120)")
         g.beatkeeper__subdivisions
+        g.beatkeeper__notes
         g.beatkeeper__playback
 
       .beatkeeper__actions
