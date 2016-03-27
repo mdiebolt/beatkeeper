@@ -13,5 +13,4 @@ createLoops = ->
     player.play(data.pattern)
 
 module.exports =
-  create: ->
-    createLoops()
+  create: createLoops

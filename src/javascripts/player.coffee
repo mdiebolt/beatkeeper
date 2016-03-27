@@ -3,15 +3,22 @@ beats = require("beat_data")
 staff = require("staff")
 
 bars = 2
-tempo = 60
+tempo = 180
 eighthNoteTime = (60 / tempo) / 2
 startTime = endTime = null
+
+activeSources = []
 
 playSound = (buffer, time) ->
   source = context.createBufferSource()
   source.buffer = buffer
   source.connect(context.destination)
   source.start(time)
+  source.onended = ->
+    index = activeSources.indexOf(source)
+    activeSources.splice(index, 1)
+
+  activeSources.push(source)
 
 updateProgress = ->
   return if context.currentTime > endTime
@@ -19,9 +26,10 @@ updateProgress = ->
   requestAnimationFrame ->
     dt = context.currentTime - startTime
     totalBeatTime = endTime - startTime
-    staffWidth = window.innerWidth - 300 - (2 * 30)
+    staffWidth = window.innerWidth - 300 - (2 * MARGIN)
 
     x = (dt / totalBeatTime) * staffWidth
+    x = Math.min(x, staffWidth)
 
     staff.update [
       { x: x, y: 40 }
@@ -48,9 +56,13 @@ playKick = (pattern, beginningOfBar) ->
       beat = i * eighthNoteTime
       playSound(BUFFERS.kick, beginningOfBar + beat)
 
+stopAll = ->
+  activeSources.forEach (source) ->
+    source.stop()
+
 module.exports =
   play: (pattern) ->
-    activeSources = 0
+    stopAll()
     startTime = context.currentTime
     endTime = startTime + (bars * 8 * eighthNoteTime)
 
@@ -64,3 +76,5 @@ module.exports =
       playKick(kickPattern, beginningOfBar)
 
     updateProgress()
+
+  stop: stopAll()

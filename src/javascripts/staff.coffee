@@ -5,8 +5,7 @@ prop = (attr) ->
     d[attr]
 
 # Size staff dynamically. Sidebar is 300px
-margin = 30
-staffWidth = window.innerWidth - 300 - (2 * margin)
+staffWidth = window.innerWidth - 300 - (2 * MARGIN)
 staffHeight = 120
 
 strokeWidth = 2
@@ -43,11 +42,11 @@ line = d3.svg.line()
   .y(prop("y"))
 
 $marginContainer = d3.select(".beatkeeper__notation-container").attr
-  transform: "translate(#{margin},0)"
+  transform: "translate(#{MARGIN},0)"
 
 $svg = d3.select(".beatkeeper__notation").attr
-  width: staffWidth + (2 * margin)
-  height: staffHeight + margin
+  width: staffWidth + (2 * MARGIN)
+  height: staffHeight + MARGIN
 
 $lineContainers = d3.selectAll(".beatkeeper__instrument")
 
