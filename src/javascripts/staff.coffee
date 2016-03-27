@@ -2,7 +2,7 @@ d3 = require("d3")
 
 # Size staff dynamically. Sidebar is 300px
 staffWidth = window.innerWidth - 300 - (2 * MARGIN)
-staffHeight = 120
+staffHeight = 160
 
 instrumentLines = [
   [{ x: 0, y: 0 }, { x: staffWidth, y: 0 }]
@@ -11,8 +11,8 @@ instrumentLines = [
 ]
 
 playbackLine = [
-  { x: 0, y: 40 }
-  { x: 0, y: 120 }
+  { x: 0, y: 0 }
+  { x: 0, y: 160 }
 ]
 
 beatNotes = []
@@ -41,7 +41,7 @@ $marginContainer = d3.select(".beatkeeper__notation-container").attr
 
 $svg = d3.select(".beatkeeper__notation").attr
   width: staffWidth + (2 * MARGIN)
-  height: staffHeight + MARGIN
+  height: staffHeight
 
 $lineContainers = d3.selectAll(".beatkeeper__instrument")
 

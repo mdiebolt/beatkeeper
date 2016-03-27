@@ -3,7 +3,7 @@ beats = require("beat_data")
 staff = require("staff")
 
 bars = 2
-tempo = 180
+tempo = 120
 eighthNoteTime = (60 / tempo) / 2
 startTime = endTime = null
 
@@ -32,8 +32,8 @@ updateProgress = ->
     x = Math.min(x, staffWidth)
 
     staff.update [
-      { x: x, y: 40 }
-      { x: x, y: 120 }
+      { x: x, y: 0 }
+      { x: x, y: 160 }
     ]
 
     updateProgress()

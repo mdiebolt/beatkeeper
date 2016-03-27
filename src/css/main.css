@@ -4,6 +4,7 @@ body {
 
 body,
 button {
+  color: #4a4a4a;
   font-family: Futura, Verdana, sans-serif;
 }
 
@@ -18,7 +19,7 @@ button {
 }
 
 .site__main {
-  padding-left: 300px;
+  padding-left: calc(300px + 1em);
 }
 
 .beatkeeper__loops {
@@ -61,7 +62,6 @@ button {
 
 .beatkeeper__loop-listen:before {
   content: attr(data-number) ".";
-  padding-left: 0.4em;
   line-height: 2;
 }
 
@@ -69,14 +69,14 @@ button {
   content: "►";
 }
 
+.beatkeeper__loop:hover .beatkeeper__loop-preview:before {
+  visibility: visible;
+}
+
 .beatkeeper__loop-preview:before {
   content: attr(data-name);
   visibility: hidden;
   line-height: 2.25;
-}
-
-.beatkeeper__loop-preview:hover:before {
-  visibility: visible;
 }
 
 .beatkeeper__loop-preview,
@@ -90,17 +90,28 @@ button {
 }
 
 .beatkeeper__playback {
-  stroke: red;
+  stroke: rgba(0, 0, 0, 0.8);
   stroke-width: 4px;
   fill: none;
 }
 
+.beatkeeper__instrument {
+  display: none;
+}
+
+.beatkeeper__subdivisions path:nth-child(even) {
+  display: none;
+}
+
+.beatkeeper__subdivisions path:nth-child(17) {
+  display: none;
+}
+
 .beatkeeper__instrument,
 .beatkeeper__subdivisions {
-  stroke: blue;
+  stroke: #aaa;
   stroke-width: 2px;
   fill: none;
-  display: none;
 }
 
 .beatkeeper__playback-animation {
@@ -133,21 +144,29 @@ button {
   top: 150px;
 }
 
+.beatkeeper__beat-note {
+  fill: #eee;
+  stroke-width: 2px;
+  stroke: #ccc;
+  cursor: pointer;
+}
+
 .beatkeeper__button {
-  background: red;
-  box-shadow: #D00000 0px 3px 0px 0;
+  background: #d8d8d8;
+  box-shadow: #c8c8c8 0px 3px 0px 0;
   border: none;
   border-radius: 2px;
-  color: white;
+  color: #4a4a4a;
   font-size: 16px;
-  padding: 1em;
-  margin: 0 0.25em;
-  margin-bottom: 1em;
+  padding: 1em 3em;
   outline: none;
+  text-transform: uppercase;
+  margin: auto;
+  margin-bottom: 1em;
 }
 
 .beatkeeper__button:hover {
-  background: #FF6C6C;
+  background: #e8e8e8;
 }
 
 .beatkeeper__button:active {
@@ -155,7 +174,12 @@ button {
   transform: translateY(3px);
 }
 
-.beatkeeper__beat-note {
-  fill: rgba(100, 100, 100, 0.5);
-  cursor: pointer;
+.beatkeeper__preview-submission,
+.beatkeeper__try-again,
+.beatkeeper__give-up {
+  display: none;
+}
+
+.beatkeeper__submit {
+  display: block;
 }
