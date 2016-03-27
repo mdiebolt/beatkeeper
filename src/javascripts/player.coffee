@@ -3,7 +3,7 @@ beats = require("beat_data")
 staff = require("staff")
 
 bars = 2
-tempo = 120
+tempo = 60
 eighthNoteTime = (60 / tempo) / 2
 startTime = endTime = null
 
@@ -19,7 +19,7 @@ updateProgress = ->
   requestAnimationFrame ->
     dt = context.currentTime - startTime
     totalBeatTime = endTime - startTime
-    staffWidth = window.innerWidth - 300
+    staffWidth = window.innerWidth - 300 - (2 * 30)
 
     x = (dt / totalBeatTime) * staffWidth
 

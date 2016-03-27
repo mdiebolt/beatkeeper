@@ -7,28 +7,31 @@ html(lang="en")
   body
     .site__sidebar
       .beatkeeper__loops
+        h2 Loops
     .site__main
       .beatkeeper__playback-animation
         img.beatkeeper__playback-hh(src="src/images/high_hat.svg")
         img.beatkeeper__playback-snare(src="src/images/snare_drum.svg")
         img.beatkeeper__playback-bass(src="src/images/bass_drum.svg")
       svg.beatkeeper__notation
-        pattern#hh-thumbnail(x="0" y="0" height="15" width="15")
-          image(x="0" y="0" width="15" height="15" xlink:href="src/images/snare.jpg")
-        pattern#snare-thumbnail(x="0" y="0" height="15" width="15")
-          image(x="0" y="0" width="15" height="15" xlink:href="src/images/snare.jpg")
-        pattern#kick-thumbnail(x="0" y="0" height="15" width="15")
-          image(x="0" y="0" width="15" height="15" xlink:href="src/images/snare.jpg")
+        g.beatkeeper__notation-container
+          pattern#hh-thumbnail(x="0" y="0" height="15" width="15")
+            image(x="0" y="0" width="15" height="15" xlink:href="src/images/snare.jpg")
+          pattern#snare-thumbnail(x="0" y="0" height="15" width="15")
+            image(x="0" y="0" width="15" height="15" xlink:href="src/images/snare.jpg")
+          pattern#kick-thumbnail(x="0" y="0" height="15" width="15")
+            image(x="0" y="0" width="15" height="15" xlink:href="src/images/snare.jpg")
 
-        g.beatkeeper__instruments
-          g.beatkeeper__instrument(transform="translate(0,40)")
-          g.beatkeeper__instrument(transform="translate(0,80)")
-          g.beatkeeper__instrument(transform="translate(0,120)")
-        g.beatkeeper__subdivisions
-        g.beatkeeper__notes
-        g.beatkeeper__playback
+          g.beatkeeper__instruments
+            g.beatkeeper__instrument(transform="translate(0,40)")
+            g.beatkeeper__instrument(transform="translate(0,80)")
+            g.beatkeeper__instrument(transform="translate(0,120)")
+          g.beatkeeper__subdivisions
+          g.beatkeeper__notes
+          g.beatkeeper__playback
 
       .beatkeeper__actions
+        button.beatkeeper__button.beatkeeper__preview-submission Listen
         button.beatkeeper__button.beatkeeper__submit Submit
         button.beatkeeper__button.beatkeeper__try-again Try again
         button.beatkeeper__button.beatkeeper__give-up Tell me the answer

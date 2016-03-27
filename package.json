@@ -6,8 +6,10 @@
   "scripts": {
     "test": "",
     "webpack": "webpack",
+    "webpack:server": "webpack-dev-server -d --hot",
     "jade": "jade src/index.jade --out .",
-    "start": "webpack-dev-server -d --hot"
+    "jade:watch": "jade src/index.jade -w --out .",
+    "start": "npm run webpack:server & npm run jade:watch"
   },
   "keywords": [
     "drum",
