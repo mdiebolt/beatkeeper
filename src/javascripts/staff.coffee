@@ -1,14 +1,9 @@
 d3 = require("d3")
 
-prop = (attr) ->
-  (d) ->
-    d[attr]
-
 # Size staff dynamically. Sidebar is 300px
 staffWidth = window.innerWidth - 300 - (2 * MARGIN)
 staffHeight = 120
 
-strokeWidth = 2
 instrumentLines = [
   [{ x: 0, y: 0 }, { x: staffWidth, y: 0 }]
   [{ x: 0, y: 0 }, { x: staffWidth, y: 0 }]
@@ -38,8 +33,8 @@ verticalLines = [0..divisions].map (n) ->
   ]
 
 line = d3.svg.line()
-  .x(prop("x"))
-  .y(prop("y"))
+  .x((d) -> d.x)
+  .y((d) -> d.y)
 
 $marginContainer = d3.select(".beatkeeper__notation-container").attr
   transform: "translate(#{MARGIN},0)"
@@ -54,22 +49,14 @@ createInstrumentLines = ->
   $lineContainers
     .append("path")
       .data(instrumentLines)
-      .attr
-        d: line
-        stroke: "blue"
-        "stroke-width": strokeWidth
-        fill: "none"
+      .attr("d", line)
 
 createSubdivisionLines = ->
   d3.select(".beatkeeper__subdivisions").selectAll("path")
     .data(verticalLines)
     .enter()
     .append("path")
-        .attr
-          stroke: "blue"
-          "stroke-width": strokeWidth
-          fill: "none"
-          d: line
+        .attr("d", line)
 
 createBeatNotes = ->
   $circle = d3.select(".beatkeeper__notes").selectAll("circle")
@@ -97,9 +84,6 @@ createPlaybackLine = ->
     .enter()
     .append("path")
       .attr("d", line(playbackLine))
-      .attr("stroke", "red")
-      .attr("stroke-width", strokeWidth)
-      .attr("fill", "none")
 
 updatePlaybackLine = (data) ->
   playbackLine = data
