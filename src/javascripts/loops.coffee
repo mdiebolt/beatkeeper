@@ -4,8 +4,13 @@ player = require("player")
 
 $loops = d3.select(".beatkeeper__loops").selectAll("div").data(beats)
 
+window.activePattern = beats[0].pattern
+
 playPattern = (data) ->
+  window.activePattern = data.pattern
   player.play(data.pattern)
+  d3.selectAll(".beatkeeper__loop").classed("active", false)
+  d3.select(@parentNode).classed("active", true)
 
 createPlaybackButtons = ($parent) ->
   $parent
@@ -27,6 +32,7 @@ createLoops = ->
   $loop = $loops.enter()
     .append("div")
       .attr("class", "beatkeeper__loop")
+      .classed "active", (_, i) -> i == 0 # select the first loop by default
 
   createPlaybackButtons($loop)
   createLoopPreviews($loop)

@@ -15,6 +15,8 @@ playbackLine = [
   { x: 0, y: 160 }
 ]
 
+beatSubmission = ""
+
 beatNotes = []
 
 divisions = 16
@@ -23,9 +25,9 @@ verticalLines = [0..divisions].map (n) ->
   x = n * subdivisionIncrements
 
   unless n == divisions
-    beatNotes.push { x: x, y: 40, radius: 15, patternLink: "#hh-thumbnail" }
-    beatNotes.push { x: x, y: 80, radius: 15, patternLink: "#snare-thumbnail" }
-    beatNotes.push { x: x, y: 120, radius: 15, patternLink: "#kick-thumbnail" }
+    beatNotes.push { x: x, y: 40, radius: 15, patternLink: "#hh-thumbnail", class: "high-hat" }
+    beatNotes.push { x: x, y: 80, radius: 15, patternLink: "#snare-thumbnail", class: "snare" }
+    beatNotes.push { x: x, y: 120, radius: 15, patternLink: "#kick-thumbnail", class: "kick" }
 
   [
     { x: x, y: 40 }
@@ -64,7 +66,7 @@ createBeatNotes = ->
     .enter()
     .append("circle")
       .attr
-        class: "beatkeeper__beat-note"
+        class: (d) -> "beatkeeper__beat-note #{d.class}"
         cx: (d) -> d.x
         cy: (d) -> d.y
         r: (d) -> d.radius
@@ -91,6 +93,40 @@ updatePlaybackLine = (data) ->
   $playback.data(playbackLine)
   $playback.selectAll("path").attr("d", line(playbackLine))
 
+check = ->
+  hh = []
+  snare = []
+  kick = []
+
+  d3.selectAll(".beatkeeper__beat-note.high-hat").each ->
+    if d3.select(@).style("fill") == "url(\"#hh-thumbnail\")"
+      hh.push "h"
+    else
+      hh.push "-"
+
+  d3.selectAll(".beatkeeper__beat-note.snare").each ->
+    if d3.select(@).style("fill") == "url(\"#snare-thumbnail\")"
+      snare.push "s"
+    else
+      snare.push "-"
+
+  d3.selectAll(".beatkeeper__beat-note.kick").each ->
+    if d3.select(@).style("fill") == "url(\"#kick-thumbnail\")"
+      kick.push "k"
+    else
+      kick.push "-"
+
+  hhPattern = hh.join("").slice(0, 8)
+  snarePattern = snare.join("").slice(0, 8)
+  kickPattern = kick.join("").slice(0, 8)
+
+  pattern = hhPattern + "\n" + snarePattern + "\n" + kickPattern
+
+  if window.activePattern == pattern
+    console.log "a match"
+  else
+    console.log "no match"
+
 module.exports =
   create: ->
     createInstrumentLines()
@@ -98,5 +134,9 @@ module.exports =
     createPlaybackLine()
     createBeatNotes()
 
+    d3.select(".beatkeeper__submit").on("click", check)
+
   update: (data) ->
     updatePlaybackLine(data)
+
+  checkPattern: check

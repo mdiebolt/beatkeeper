@@ -56,25 +56,31 @@ playKick = (pattern, beginningOfBar) ->
       beat = i * eighthNoteTime
       playSound(BUFFERS.kick, beginningOfBar + beat)
 
-stopAll = ->
-  activeSources.forEach (source) ->
-    source.stop()
+stopSource = (source) ->
+  source.stop()
 
-module.exports =
-  play: (pattern) ->
-    stopAll()
-    startTime = context.currentTime
-    endTime = startTime + (bars * 8 * eighthNoteTime)
+stop = ->
+  activeSources.forEach(stopSource)
 
-    [0...bars].forEach (bar) ->
-      beginningOfBar = startTime + bar * 8 * eighthNoteTime
+playBar = (pattern, beginningOfBar) ->
+  [hihatPattern, snarePattern, kickPattern] = pattern.split("\n")
 
-      [hihatPattern, snarePattern, kickPattern] = pattern.split("\n")
+  playHats(hihatPattern, beginningOfBar)
+  playSnare(snarePattern, beginningOfBar)
+  playKick(kickPattern, beginningOfBar)
 
-      playHats(hihatPattern, beginningOfBar)
-      playSnare(snarePattern, beginningOfBar)
-      playKick(kickPattern, beginningOfBar)
+play = (pattern) ->
+  stop()
+  startTime = context.currentTime
+  endTime = startTime + (bars * 8 * eighthNoteTime)
 
-    updateProgress()
+  [0...bars].forEach (bar) ->
+    beginningOfBar = startTime + bar * 8 * eighthNoteTime
+    playBar(pattern, beginningOfBar)
 
-  stop: stopAll()
+  updateProgress()
+
+module.exports = {
+  play
+  stop
+}
