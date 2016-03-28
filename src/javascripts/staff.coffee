@@ -72,8 +72,8 @@ createBeatNotes = ->
   $circle.on "click", (data) ->
     $el = d3.select(@)
 
-    if $el.style("fill") == "url(\"#hh-thumbnail\")"
-      $el.style "fill", "rgba(100, 100, 100, 0.5)"
+    if $el.style("fill") in ["url(\"#hh-thumbnail\")", "url(\"#snare-thumbnail\")", "url(\"#kick-thumbnail\")"]
+      $el.style "fill", "#eee"
     else
       $el.style "fill", (d) ->
         "url(#{d.patternLink})"
