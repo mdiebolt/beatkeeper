@@ -1,0 +1,31 @@
+.beatkeeper__playback {
+  stroke: #aaa;
+  stroke-width: 4px;
+  fill: none;
+}
+
+.beatkeeper__instrument {
+  display: none;
+}
+
+.beatkeeper__subdivisions path:nth-child(even) {
+  display: none;
+}
+
+.beatkeeper__subdivisions path:nth-child(17) {
+  display: none;
+}
+
+.beatkeeper__instrument,
+.beatkeeper__subdivisions {
+  stroke: #aaa;
+  stroke-width: 2px;
+  fill: none;
+}
+
+.beatkeeper__beat-note {
+  fill: #eee;
+  stroke-width: 2px;
+  stroke: #ccc;
+  cursor: pointer;
+}

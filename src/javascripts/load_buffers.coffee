@@ -1,9 +1,11 @@
 BufferLoader = require("buffer_loader")
 
-# Keep track of all loaded buffers.
-window.BUFFERS = {}
-# Page-wide audio context.
-window.context = null
+BUFFERS = {}
+
+# Fix up prefixing
+window.AudioContext ||= window.webkitAudioContext
+# WebAudio API context
+context = new AudioContext()
 
 # An object to track the buffers to load {name: path}
 BUFFERS_TO_LOAD =
@@ -26,12 +28,9 @@ loadBuffers = ->
 
   bufferLoader.load()
 
-document.addEventListener "DOMContentLoaded", ->
-  try
-    # Fix up prefixing
-    window.AudioContext = window.AudioContext || window.webkitAudioContext
-    window.context = new AudioContext()
-  catch e
-    alert("Web Audio API is not supported in this browser");
+loadBuffers()
 
-  loadBuffers()
+module.exports = {
+  BUFFERS
+  context
+}

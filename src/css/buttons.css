@@ -1,0 +1,36 @@
+.beatkeeper__button {
+  background: #d8d8d8;
+  border-radius: 2px;
+  border: none;
+  box-shadow: #c8c8c8 0px 3px 0px 0;
+  color: #4a4a4a;
+  cursor: pointer;
+  margin-bottom: 1em;
+  margin: auto;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.beatkeeper__button:hover {
+  background: #e8e8e8;
+}
+
+.beatkeeper__button:active {
+  box-shadow: none;
+  transform: translateY(3px);
+}
+
+.beatkeeper__button[s-visible] {
+  display: block;
+}
+
+.beatkeeper__button[m-wide] {
+  padding: 1em 3em;
+  font-size: 16px;
+}
+
+.beatkeeper__preview-submission,
+.beatkeeper__try-again,
+.beatkeeper__give-up {
+  display: none;
+}

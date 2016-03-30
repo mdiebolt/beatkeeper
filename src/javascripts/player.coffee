@@ -1,4 +1,4 @@
-require("load_buffers")
+{BUFFERS, context} = require("load_buffers")
 beats = require("beat_data")
 staff = require("staff")
 

@@ -19,9 +19,9 @@ verticalLines = [0..subdivision].map (n) ->
   x = n * subdivisionIncrements
 
   unless n == subdivision
-    beatNotes.push { x: x, y: INSTRUMENT_LINE_HEIGHT, radius: 15, patternLink: "#hh-thumbnail", class: "hh" }
-    beatNotes.push { x: x, y: INSTRUMENT_LINE_HEIGHT * 2, radius: 15, patternLink: "#snare-thumbnail", class: "snare" }
-    beatNotes.push { x: x, y: INSTRUMENT_LINE_HEIGHT * 3, radius: 15, patternLink: "#kick-thumbnail", class: "kick" }
+    beatNotes.push { x: x, y: INSTRUMENT_LINE_HEIGHT, round: 2, size: 30, patternLink: "#hh-thumbnail", class: "hh" }
+    beatNotes.push { x: x, y: INSTRUMENT_LINE_HEIGHT * 2, round: 2, size: 30, patternLink: "#snare-thumbnail", class: "snare" }
+    beatNotes.push { x: x, y: INSTRUMENT_LINE_HEIGHT * 3, round: 2, size: 30, patternLink: "#kick-thumbnail", class: "kick" }
 
   [{ x: x, y: INSTRUMENT_LINE_HEIGHT }, { x: x, y: INSTRUMENT_LINE_HEIGHT * 3 }]
 
@@ -52,17 +52,20 @@ createSubdivisionLines = ->
         .attr("d", line)
 
 createBeatNotes = ->
-  $circle = d3.select(".beatkeeper__notes").selectAll("circle")
+  $rect = d3.select(".beatkeeper__notes").selectAll("rect")
     .data(beatNotes)
     .enter()
-    .append("circle")
+    .append("rect")
       .attr
         class: (d) -> "beatkeeper__beat-note #{d.class}"
-        cx: (d) -> d.x
-        cy: (d) -> d.y
-        r: (d) -> d.radius
+        x: (d) -> d.x - (d.size / 2)
+        y: (d) -> d.y - (d.size / 2)
+        width: (d) -> d.size
+        height: (d) -> d.size
+        rx: (d) -> d.round
+        ry: (d) -> d.round
 
-  $circle.on "click", (data) ->
+  $rect.on "click", (data) ->
     $el = d3.select(@)
 
     if $el.style("fill") in ["url(\"#hh-thumbnail\")", "url(\"#snare-thumbnail\")", "url(\"#kick-thumbnail\")"]
@@ -72,24 +75,20 @@ createBeatNotes = ->
         "url(#{d.patternLink})"
 
 createPlaybackLine = ->
-  d3.select(".beatkeeper__playback").selectAll("path")
-    .data(playbackLine)
-    .enter()
+  d3.select(".beatkeeper__playback")
     .append("path")
       .attr("d", line(playbackLine))
 
 updatePlaybackLine = (data) ->
-  playbackData = line(data)
-
-  d3.select(".beatkeeper__playback")
-    .selectAll("path")
-      .attr("d", playbackData)
+  d3.select(".beatkeeper__playback").selectAll("path")
+      .attr("d", line(data))
 
 instrumentPattern = (instrument) ->
   arr = []
+  activeFill = "url(\"##{instrument}-thumbnail\")"
 
   d3.selectAll(".beatkeeper__beat-note.#{instrument}").each ->
-    if d3.select(@).style("fill") == "url(\"##{instrument}-thumbnail\")"
+    if d3.select(@).style("fill") == activeFill
       arr.push "*"
     else
       arr.push "-"

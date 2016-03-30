@@ -15,7 +15,7 @@ playPattern = (data) ->
 createPlaybackButtons = ($parent) ->
   $parent
     .append("button")
-      .attr("class", "beatkeeper__loop-listen")
+      .attr("class", "beatkeeper__loop-listen beatkeeper__button")
       .on("click", playPattern)
       .attr "data-number", (d, index) ->
         index + 1
