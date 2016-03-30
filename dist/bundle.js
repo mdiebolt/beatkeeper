@@ -44,77 +44,77 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $lineContainers, $svg, d3, divisions, i, line, lineData, prop, results, staffHeight, staffWidth, subdivisionIncrements, verticalLine;
+	window.MARGIN = 30;
 
-	prop = function(attr) {
-	  return function(d) {
-	    return d[attr];
-	  };
-	};
+	window.INSTRUMENT_LINE_HEIGHT = 60;
 
-	staffWidth = 800;
+	window.TEMPO = 80;
 
-	staffHeight = 120;
+	window.MAIN_WIDTH = window.innerWidth - 300;
 
-	lineData = [
-	  {
-	    x: 0,
-	    y: 0
-	  }, {
-	    x: staffWidth,
-	    y: 0
-	  }
-	];
+	window.STAFF_WIDTH = MAIN_WIDTH - (2 * MARGIN);
 
-	verticalLine = [
-	  {
-	    x: 0,
-	    y: 40
-	  }, {
-	    x: 0,
-	    y: staffHeight
-	  }
-	];
+	window.STAFF_HEIGHT = 240;
 
-	d3 = __webpack_require__(1);
+	__webpack_require__(1).create();
 
-	line = d3.svg.line().x(prop("x")).y(prop("y")).interpolate("linear");
-
-	$svg = d3.select(".beatkeeper__notation");
-
-	$lineContainers = d3.selectAll(".beatkeeper__instrument-line");
-
-	$lineContainers.append("path").attr("d", line(lineData)).attr("stroke", "blue").attr("stroke-width", 2).attr("fill", "none");
-
-	alert("hi");
-
-	divisions = 8;
-
-	subdivisionIncrements = staffWidth / divisions;
-
-	(function() {
-	  results = [];
-	  for (var i = 0; 0 <= divisions ? i <= divisions : i >= divisions; 0 <= divisions ? i++ : i--){ results.push(i); }
-	  return results;
-	}).apply(this).forEach(function(n) {
-	  return $svg.append("path").attr("stroke", "blue").attr("stroke-width", 2).attr("fill", "none").attr("d", function(d) {
-	    var data;
-	    data = [
-	      {
-	        x: verticalLine[0].x + (subdivisionIncrements * n),
-	        y: verticalLine[0].y
-	      }, {
-	        x: verticalLine[1].x + (subdivisionIncrements * n),
-	        y: verticalLine[1].y
-	      }
-	    ];
-	    return line(data);
-	  });
-	});
+	__webpack_require__(7).create();
 
 
 /***/ },
 /* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $loops, beats, createLoopPreviews, createLoops, createPlaybackButtons, d3, playPattern, player;
+
+	d3 = __webpack_require__(2);
+
+	beats = __webpack_require__(3);
+
+	player = __webpack_require__(4);
+
+	$loops = d3.select(".beatkeeper__loops").selectAll("div").data(beats);
+
+	window.activePattern = beats[0].pattern;
+
+	playPattern = function(data) {
+	  window.activePattern = data.pattern;
+	  player.play(data.pattern);
+	  d3.selectAll(".beatkeeper__loop").classed("active", false);
+	  return d3.select(this.parentNode).classed("active", true);
+	};
+
+	createPlaybackButtons = function($parent) {
+	  return $parent.append("button").attr("class", "beatkeeper__loop-listen").on("click", playPattern).attr("data-number", function(d, index) {
+	    return index + 1;
+	  });
+	};
+
+	createLoopPreviews = function($parent) {
+	  return $parent.append("div").attr({
+	    "class": "beatkeeper__loop-preview",
+	    "data-name": function(d) {
+	      return d.name;
+	    }
+	  });
+	};
+
+	createLoops = function() {
+	  var $loop;
+	  $loop = $loops.enter().append("div").attr("class", "beatkeeper__loop").classed("active", function(_, i) {
+	    return i === 0;
+	  });
+	  createPlaybackButtons($loop);
+	  return createLoopPreviews($loop);
+	};
+
+	module.exports = {
+	  create: createLoops
+	};
+
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
@@ -9671,6 +9671,471 @@
 	  });
 	  if (true) this.d3 = d3, !(__WEBPACK_AMD_DEFINE_FACTORY__ = (d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
 	}();
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	module.exports = [
+	  {
+	    name: "Four on the floor",
+	    pattern: "********\n--*---*-\n*-*-*-*-"
+	  }, {
+	    name: "Skeleton",
+	    pattern: "********\n--*---*-\n*---*---"
+	  }, {
+	    name: "beat3",
+	    pattern: "********\n--*---*-\n*---**--"
+	  }, {
+	    name: "beat4",
+	    pattern: "********\n--*---*-\n**--*---"
+	  }, {
+	    name: "We will rock you",
+	    pattern: "********\n--*---*-\n**--**--"
+	  }, {
+	    name: "beat6",
+	    pattern: "********\n--*---*-\n*--**---"
+	  }, {
+	    name: "beat7",
+	    pattern: "********\n--*---*-\n*---*--*"
+	  }, {
+	    name: "Heartbeat",
+	    pattern: "********\n--*---*-\n*--**--*"
+	  }, {
+	    name: "beat9",
+	    pattern: "********\n--*---*-\n*--***--"
+	  }, {
+	    name: "beat10",
+	    pattern: "********\n--*---*-\n*--***-*"
+	  }, {
+	    name: "beat11",
+	    pattern: "********\n--*---*-\n*--***--"
+	  }, {
+	    name: "beat12",
+	    pattern: "********\n--*---*-\n**-**--*"
+	  }, {
+	    name: "beat13",
+	    pattern: "********\n--*---*-\n**-**---"
+	  }, {
+	    name: "Motorik",
+	    pattern: "********\n--*---*-\n**-***-*"
+	  }, {
+	    name: "beat15",
+	    pattern: "********\n--*---*-\n*--*---*"
+	  }, {
+	    name: "beat16",
+	    pattern: "********\n--*---*-\n*--*-*--"
+	  }, {
+	    name: "beat17",
+	    pattern: "********\n--*---*-\n*----*-*"
+	  }, {
+	    name: "beat18",
+	    pattern: "********\n--*---*-\n*--*-*-*"
+	  }, {
+	    name: "beat19",
+	    pattern: "********\n--*---*-\n**---*-*"
+	  }, {
+	    name: "beat20",
+	    pattern: "********\n--*---*-\n**-*-*-*"
+	  }
+	];
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var activeSources, beats, eighthNoteTime, endTime, play, playBar, playBufferAt, playSound, staff, startTime, stop, stopSource, updateProgress;
+
+	__webpack_require__(5);
+
+	beats = __webpack_require__(3);
+
+	staff = __webpack_require__(7);
+
+	eighthNoteTime = (60 / TEMPO) / 2;
+
+	startTime = endTime = null;
+
+	activeSources = [];
+
+	playSound = function(buffer, time) {
+	  var source;
+	  source = context.createBufferSource();
+	  source.buffer = buffer;
+	  source.connect(context.destination);
+	  source.start(time);
+	  source.onended = function() {
+	    var index;
+	    index = activeSources.indexOf(source);
+	    return activeSources.splice(index, 1);
+	  };
+	  return activeSources.push(source);
+	};
+
+	updateProgress = function() {
+	  if (context.currentTime > endTime) {
+	    return;
+	  }
+	  return requestAnimationFrame(function() {
+	    var dt, totalBeatTime, x;
+	    dt = context.currentTime - startTime;
+	    totalBeatTime = endTime - startTime;
+	    x = (dt / totalBeatTime) * STAFF_WIDTH;
+	    x = Math.min(x, STAFF_WIDTH);
+	    staff.update([
+	      {
+	        x: x,
+	        y: 0
+	      }, {
+	        x: x,
+	        y: INSTRUMENT_LINE_HEIGHT * 4
+	      }
+	    ]);
+	    return updateProgress();
+	  });
+	};
+
+	playBufferAt = function(time, buffer, pattern) {
+	  return pattern.split("").forEach(function(note, i) {
+	    var beat;
+	    if (note !== "-") {
+	      beat = i * eighthNoteTime;
+	      return playSound(buffer, time + beat);
+	    }
+	  });
+	};
+
+	stopSource = function(source) {
+	  return source.stop();
+	};
+
+	stop = function() {
+	  return activeSources.forEach(stopSource);
+	};
+
+	playBar = function(pattern, time) {
+	  var hihatPattern, kickPattern, ref, snarePattern;
+	  ref = pattern.split("\n"), hihatPattern = ref[0], snarePattern = ref[1], kickPattern = ref[2];
+	  playBufferAt(time, BUFFERS.hihat, hihatPattern);
+	  playBufferAt(time, BUFFERS.snare, snarePattern);
+	  return playBufferAt(time, BUFFERS.kick, kickPattern);
+	};
+
+	play = function(pattern) {
+	  stop();
+	  startTime = context.currentTime;
+	  endTime = startTime + (8 * eighthNoteTime);
+	  playBar(pattern, startTime);
+	  return updateProgress();
+	};
+
+	module.exports = {
+	  play: play,
+	  stop: stop
+	};
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var BUFFERS_TO_LOAD, BufferLoader, loadBuffers;
+
+	BufferLoader = __webpack_require__(6);
+
+	window.BUFFERS = {};
+
+	window.context = null;
+
+	BUFFERS_TO_LOAD = {
+	  kick: "src/sounds/kick.wav",
+	  snare: "src/sounds/snare.wav",
+	  hihat: "src/sounds/hihat.wav"
+	};
+
+	loadBuffers = function() {
+	  var bufferLoader, name, names, path, paths;
+	  names = [];
+	  paths = [];
+	  for (name in BUFFERS_TO_LOAD) {
+	    path = BUFFERS_TO_LOAD[name];
+	    names.push(name);
+	    paths.push(path);
+	  }
+	  bufferLoader = new BufferLoader(context, paths, function(bufferList) {
+	    return bufferList.forEach(function(buffer, i) {
+	      name = names[i];
+	      return BUFFERS[name] = buffer;
+	    });
+	  });
+	  return bufferLoader.load();
+	};
+
+	document.addEventListener("DOMContentLoaded", function() {
+	  var e, error;
+	  try {
+	    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+	    window.context = new AudioContext();
+	  } catch (error) {
+	    e = error;
+	    alert("Web Audio API is not supported in this browser");
+	  }
+	  return loadBuffers();
+	});
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	var BufferLoader, loadError, loadSuccess;
+
+	BufferLoader = function(context, urlList, callback) {
+	  this.context = context;
+	  this.urlList = urlList;
+	  this.onload = callback;
+	  this.bufferList = [];
+	  return this.loadCount = 0;
+	};
+
+	loadSuccess = function(buffer, loader, index) {
+	  if (!buffer) {
+	    return alert("error decoding file data: " + url);
+	  }
+	  loader.bufferList[index] = buffer;
+	  loader.loadCount += 1;
+	  if (loader.loadCount === loader.urlList.length) {
+	    return loader.onload(loader.bufferList);
+	  }
+	};
+
+	loadError = function(error) {
+	  return console.error("decodeAudioData error", error);
+	};
+
+	BufferLoader.prototype.loadBuffer = function(url, index) {
+	  var loader, request;
+	  request = new XMLHttpRequest();
+	  request.open("GET", url, true);
+	  request.responseType = "arraybuffer";
+	  loader = this;
+	  request.onload = function() {
+	    return loader.context.decodeAudioData(request.response, function(buffer) {
+	      return loadSuccess(buffer, loader, index);
+	    }, function(error) {
+	      return loadError(error);
+	    });
+	  };
+	  request.onerror = function() {
+	    return alert("BufferLoader: XHR error");
+	  };
+	  return request.send();
+	};
+
+	BufferLoader.prototype.load = function() {
+	  return this.urlList.forEach((function(_this) {
+	    return function(item, i) {
+	      return _this.loadBuffer(item, i);
+	    };
+	  })(this));
+	};
+
+	module.exports = BufferLoader;
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $lineContainers, $marginContainer, $svg, beatNotes, check, createBeatNotes, createInstrumentLines, createPlaybackLine, createSubdivisionLines, d3, i, instrumentLines, instrumentPattern, line, playbackLine, results, subdivision, subdivisionIncrements, updatePlaybackLine, verticalLines;
+
+	d3 = __webpack_require__(2);
+
+	instrumentLines = [
+	  [
+	    {
+	      x: 0,
+	      y: 0
+	    }, {
+	      x: STAFF_WIDTH,
+	      y: 0
+	    }
+	  ], [
+	    {
+	      x: 0,
+	      y: 0
+	    }, {
+	      x: STAFF_WIDTH,
+	      y: 0
+	    }
+	  ], [
+	    {
+	      x: 0,
+	      y: 0
+	    }, {
+	      x: STAFF_WIDTH,
+	      y: 0
+	    }
+	  ]
+	];
+
+	playbackLine = [
+	  {
+	    x: 0,
+	    y: 0
+	  }, {
+	    x: 0,
+	    y: INSTRUMENT_LINE_HEIGHT * 4
+	  }
+	];
+
+	beatNotes = [];
+
+	subdivision = 8;
+
+	subdivisionIncrements = STAFF_WIDTH / subdivision;
+
+	verticalLines = (function() {
+	  results = [];
+	  for (var i = 0; 0 <= subdivision ? i <= subdivision : i >= subdivision; 0 <= subdivision ? i++ : i--){ results.push(i); }
+	  return results;
+	}).apply(this).map(function(n) {
+	  var x;
+	  x = n * subdivisionIncrements;
+	  if (n !== subdivision) {
+	    beatNotes.push({
+	      x: x,
+	      y: INSTRUMENT_LINE_HEIGHT,
+	      radius: 15,
+	      patternLink: "#hh-thumbnail",
+	      "class": "hh"
+	    });
+	    beatNotes.push({
+	      x: x,
+	      y: INSTRUMENT_LINE_HEIGHT * 2,
+	      radius: 15,
+	      patternLink: "#snare-thumbnail",
+	      "class": "snare"
+	    });
+	    beatNotes.push({
+	      x: x,
+	      y: INSTRUMENT_LINE_HEIGHT * 3,
+	      radius: 15,
+	      patternLink: "#kick-thumbnail",
+	      "class": "kick"
+	    });
+	  }
+	  return [
+	    {
+	      x: x,
+	      y: INSTRUMENT_LINE_HEIGHT
+	    }, {
+	      x: x,
+	      y: INSTRUMENT_LINE_HEIGHT * 3
+	    }
+	  ];
+	});
+
+	line = d3.svg.line().x(function(d) {
+	  return d.x;
+	}).y(function(d) {
+	  return d.y;
+	});
+
+	$marginContainer = d3.select(".beatkeeper__notation-container").attr({
+	  transform: "translate(" + MARGIN + ",0)"
+	});
+
+	$svg = d3.select(".beatkeeper__notation").attr({
+	  width: MAIN_WIDTH,
+	  height: STAFF_HEIGHT
+	});
+
+	$lineContainers = d3.selectAll(".beatkeeper__instrument");
+
+	createInstrumentLines = function() {
+	  return $lineContainers.append("path").data(instrumentLines).attr("d", line);
+	};
+
+	createSubdivisionLines = function() {
+	  return d3.select(".beatkeeper__subdivisions").selectAll("path").data(verticalLines).enter().append("path").attr("d", line);
+	};
+
+	createBeatNotes = function() {
+	  var $circle;
+	  $circle = d3.select(".beatkeeper__notes").selectAll("circle").data(beatNotes).enter().append("circle").attr({
+	    "class": function(d) {
+	      return "beatkeeper__beat-note " + d["class"];
+	    },
+	    cx: function(d) {
+	      return d.x;
+	    },
+	    cy: function(d) {
+	      return d.y;
+	    },
+	    r: function(d) {
+	      return d.radius;
+	    }
+	  });
+	  return $circle.on("click", function(data) {
+	    var $el, ref;
+	    $el = d3.select(this);
+	    if ((ref = $el.style("fill")) === "url(\"#hh-thumbnail\")" || ref === "url(\"#snare-thumbnail\")" || ref === "url(\"#kick-thumbnail\")") {
+	      return $el.style("fill", "#eee");
+	    } else {
+	      return $el.style("fill", function(d) {
+	        return "url(" + d.patternLink + ")";
+	      });
+	    }
+	  });
+	};
+
+	createPlaybackLine = function() {
+	  return d3.select(".beatkeeper__playback").selectAll("path").data(playbackLine).enter().append("path").attr("d", line(playbackLine));
+	};
+
+	updatePlaybackLine = function(data) {
+	  var playbackData;
+	  playbackData = line(data);
+	  return d3.select(".beatkeeper__playback").selectAll("path").attr("d", playbackData);
+	};
+
+	instrumentPattern = function(instrument) {
+	  var arr;
+	  arr = [];
+	  d3.selectAll(".beatkeeper__beat-note." + instrument).each(function() {
+	    if (d3.select(this).style("fill") === ("url(\"#" + instrument + "-thumbnail\")")) {
+	      return arr.push("*");
+	    } else {
+	      return arr.push("-");
+	    }
+	  });
+	  return arr.join("");
+	};
+
+	check = function() {
+	  var pattern;
+	  pattern = (instrumentPattern("hh")) + "\n" + (instrumentPattern("snare")) + "\n" + (instrumentPattern("kick"));
+	  if (window.activePattern === pattern) {
+	    return console.log("a match");
+	  } else {
+	    return console.log("no match");
+	  }
+	};
+
+	module.exports = {
+	  create: function() {
+	    createInstrumentLines();
+	    createSubdivisionLines();
+	    createPlaybackLine();
+	    createBeatNotes();
+	    return d3.select(".beatkeeper__submit").on("click", check);
+	  },
+	  update: updatePlaybackLine,
+	  checkPattern: check
+	};
+
 
 /***/ }
 /******/ ]);

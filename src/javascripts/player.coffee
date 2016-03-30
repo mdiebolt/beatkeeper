@@ -2,9 +2,7 @@ require("load_buffers")
 beats = require("beat_data")
 staff = require("staff")
 
-bars = 2
-tempo = 120
-eighthNoteTime = (60 / tempo) / 2
+eighthNoteTime = (60 / TEMPO) / 2
 startTime = endTime = null
 
 activeSources = []
@@ -26,35 +24,22 @@ updateProgress = ->
   requestAnimationFrame ->
     dt = context.currentTime - startTime
     totalBeatTime = endTime - startTime
-    staffWidth = window.innerWidth - 300 - (2 * MARGIN)
 
-    x = (dt / totalBeatTime) * staffWidth
-    x = Math.min(x, staffWidth)
+    x = (dt / totalBeatTime) * STAFF_WIDTH
+    x = Math.min(x, STAFF_WIDTH)
 
     staff.update [
       { x: x, y: 0 }
-      { x: x, y: 160 }
+      { x: x, y: INSTRUMENT_LINE_HEIGHT * 4 }
     ]
 
     updateProgress()
 
-playHats = (pattern, beginningOfBar) ->
+playBufferAt = (time, buffer, pattern) ->
   pattern.split("").forEach (note, i) ->
-    if note == "h"
+    unless note == "-"
       beat = i * eighthNoteTime
-      playSound(BUFFERS.hihat, beginningOfBar + beat)
-
-playSnare = (pattern, beginningOfBar) ->
-  pattern.split("").forEach (note, i) ->
-    if note == "s"
-      beat = i * eighthNoteTime
-      playSound(BUFFERS.snare, beginningOfBar + beat)
-
-playKick = (pattern, beginningOfBar) ->
-  pattern.split("").forEach (note, i) ->
-    if note == "k"
-      beat = i * eighthNoteTime
-      playSound(BUFFERS.kick, beginningOfBar + beat)
+      playSound(buffer, time + beat)
 
 stopSource = (source) ->
   source.stop()
@@ -62,22 +47,19 @@ stopSource = (source) ->
 stop = ->
   activeSources.forEach(stopSource)
 
-playBar = (pattern, beginningOfBar) ->
+playBar = (pattern, time) ->
   [hihatPattern, snarePattern, kickPattern] = pattern.split("\n")
 
-  playHats(hihatPattern, beginningOfBar)
-  playSnare(snarePattern, beginningOfBar)
-  playKick(kickPattern, beginningOfBar)
+  playBufferAt(time, BUFFERS.hihat, hihatPattern)
+  playBufferAt(time, BUFFERS.snare, snarePattern)
+  playBufferAt(time, BUFFERS.kick, kickPattern)
 
 play = (pattern) ->
   stop()
   startTime = context.currentTime
-  endTime = startTime + (bars * 8 * eighthNoteTime)
+  endTime = startTime + (8 * eighthNoteTime)
 
-  [0...bars].forEach (bar) ->
-    beginningOfBar = startTime + bar * 8 * eighthNoteTime
-    playBar(pattern, beginningOfBar)
-
+  playBar(pattern, startTime)
   updateProgress()
 
 module.exports = {

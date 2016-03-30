@@ -1,38 +1,29 @@
 d3 = require("d3")
 
-# Size staff dynamically. Sidebar is 300px
-staffWidth = window.innerWidth - 300 - (2 * MARGIN)
-staffHeight = 160
-
 instrumentLines = [
-  [{ x: 0, y: 0 }, { x: staffWidth, y: 0 }]
-  [{ x: 0, y: 0 }, { x: staffWidth, y: 0 }]
-  [{ x: 0, y: 0 }, { x: staffWidth, y: 0 }]
+  [{ x: 0, y: 0 }, { x: STAFF_WIDTH, y: 0 }]
+  [{ x: 0, y: 0 }, { x: STAFF_WIDTH, y: 0 }]
+  [{ x: 0, y: 0 }, { x: STAFF_WIDTH, y: 0 }]
 ]
 
 playbackLine = [
   { x: 0, y: 0 }
-  { x: 0, y: 160 }
+  { x: 0, y: INSTRUMENT_LINE_HEIGHT * 4 }
 ]
-
-beatSubmission = ""
 
 beatNotes = []
 
-divisions = 16
-subdivisionIncrements = staffWidth / divisions
-verticalLines = [0..divisions].map (n) ->
+subdivision = 8
+subdivisionIncrements = STAFF_WIDTH / subdivision
+verticalLines = [0..subdivision].map (n) ->
   x = n * subdivisionIncrements
 
-  unless n == divisions
-    beatNotes.push { x: x, y: 40, radius: 15, patternLink: "#hh-thumbnail", class: "high-hat" }
-    beatNotes.push { x: x, y: 80, radius: 15, patternLink: "#snare-thumbnail", class: "snare" }
-    beatNotes.push { x: x, y: 120, radius: 15, patternLink: "#kick-thumbnail", class: "kick" }
+  unless n == subdivision
+    beatNotes.push { x: x, y: INSTRUMENT_LINE_HEIGHT, radius: 15, patternLink: "#hh-thumbnail", class: "hh" }
+    beatNotes.push { x: x, y: INSTRUMENT_LINE_HEIGHT * 2, radius: 15, patternLink: "#snare-thumbnail", class: "snare" }
+    beatNotes.push { x: x, y: INSTRUMENT_LINE_HEIGHT * 3, radius: 15, patternLink: "#kick-thumbnail", class: "kick" }
 
-  [
-    { x: x, y: 40 }
-    { x: x, y: 120 }
-  ]
+  [{ x: x, y: INSTRUMENT_LINE_HEIGHT }, { x: x, y: INSTRUMENT_LINE_HEIGHT * 3 }]
 
 line = d3.svg.line()
   .x((d) -> d.x)
@@ -42,8 +33,8 @@ $marginContainer = d3.select(".beatkeeper__notation-container").attr
   transform: "translate(#{MARGIN},0)"
 
 $svg = d3.select(".beatkeeper__notation").attr
-  width: staffWidth + (2 * MARGIN)
-  height: staffHeight
+  width: MAIN_WIDTH
+  height: STAFF_HEIGHT
 
 $lineContainers = d3.selectAll(".beatkeeper__instrument")
 
@@ -88,39 +79,29 @@ createPlaybackLine = ->
       .attr("d", line(playbackLine))
 
 updatePlaybackLine = (data) ->
-  playbackLine = data
-  $playback = d3.select(".beatkeeper__playback")
-  $playback.data(playbackLine)
-  $playback.selectAll("path").attr("d", line(playbackLine))
+  playbackData = line(data)
+
+  d3.select(".beatkeeper__playback")
+    .selectAll("path")
+      .attr("d", playbackData)
+
+instrumentPattern = (instrument) ->
+  arr = []
+
+  d3.selectAll(".beatkeeper__beat-note.#{instrument}").each ->
+    if d3.select(@).style("fill") == "url(\"##{instrument}-thumbnail\")"
+      arr.push "*"
+    else
+      arr.push "-"
+
+  arr.join("")
 
 check = ->
-  hh = []
-  snare = []
-  kick = []
-
-  d3.selectAll(".beatkeeper__beat-note.high-hat").each ->
-    if d3.select(@).style("fill") == "url(\"#hh-thumbnail\")"
-      hh.push "h"
-    else
-      hh.push "-"
-
-  d3.selectAll(".beatkeeper__beat-note.snare").each ->
-    if d3.select(@).style("fill") == "url(\"#snare-thumbnail\")"
-      snare.push "s"
-    else
-      snare.push "-"
-
-  d3.selectAll(".beatkeeper__beat-note.kick").each ->
-    if d3.select(@).style("fill") == "url(\"#kick-thumbnail\")"
-      kick.push "k"
-    else
-      kick.push "-"
-
-  hhPattern = hh.join("").slice(0, 8)
-  snarePattern = snare.join("").slice(0, 8)
-  kickPattern = kick.join("").slice(0, 8)
-
-  pattern = hhPattern + "\n" + snarePattern + "\n" + kickPattern
+  pattern = """
+    #{instrumentPattern("hh")}
+    #{instrumentPattern("snare")}
+    #{instrumentPattern("kick")}
+  """
 
   if window.activePattern == pattern
     console.log "a match"
@@ -136,7 +117,5 @@ module.exports =
 
     d3.select(".beatkeeper__submit").on("click", check)
 
-  update: (data) ->
-    updatePlaybackLine(data)
-
+  update: updatePlaybackLine
   checkPattern: check
